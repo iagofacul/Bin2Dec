@@ -1,19 +1,57 @@
+import re
 def main():
     x = "bindec"
     y = "decbin"
 
     tipo = input("Qual conversão deseja, bindec ou decbin? ")
+    print(" ")
 
     if tipo == x:
-        numero = int(input("Qual número binário deseja converter para decimal? "))
-        a = bin2dec(numero)
-        print(a)
+        try:
+            numero = int(input("Qual número binário deseja converter para decimal? "),2)
+            a = bin2dec(numero)
+            print(a)
+            print(" ")
+            g = input("Para tentar novamente digite 1: ")
+            if g == "1":
+                print(" ")
+                main()
+            else:
+                print(" ")
+                print("Obrigado por usar meu conversor! ")
+                exit()
+        except ValueError:
+            print(" ")
+            print("Valor inválido! ")
+            print(" ")
+            main()
+
     if tipo == y:
-        numero2 = int(input("Qual número decimal deseja converter para binário? "))
-        b = dec2bin(numero2)
-        print(b)
-    else:
-        print("Obrigado por usar meu Conversor! ")
+        try:
+            numero2 = int(input("Qual número decimal deseja converter para binário? "))
+            b = dec2bin(numero2)
+            print(b)
+            print(" ")
+            g = input("Para tentar novamente digite 1: ")
+            if g == "1":
+                print("")
+                main()
+            else:
+                print(" ")
+                print("Obrigado por usar meu conversor! ")
+                exit()
+        except ValueError:
+            print(" ")
+            print("Valor inválido! ")
+            print(" ")
+            main()
+
+
+
+    if tipo != x and tipo != y:
+        print("Houve algum erro! Por favor digite novamente: ")
+        print(" ")
+        main()
 
 def dec2bin(numero2):
     lista = []
@@ -34,17 +72,27 @@ def dec2bin(numero2):
 
 def bin2dec(numero):
     lista3 = [1]
+    lista4 = [int(a) for a in str(numero)]
+    #print(lista4)#
     k = str(numero)
     n = len(k)
     an = 1
-    while an <= 2**(n-1):
+    while an < 2**(n-1):
         an = an * 2
-        print(an)
+        #print(an)#
         lista3.append(an)
-    soma = 1 #corrigir a multiplicação#
-    for x in lista3:
-        soma += an
+        #print(lista3)#
+    lista5 = []
+    for x in lista3[::-1]:
+        lista5.append(x)
+    produto = [x*y for x,y in zip(lista5,lista4)]
+    #print(produto)#
+    soma = 0
+    for x in produto:
+        soma += x
+        #print(soma)#
     return soma
+
 
 
 main()
