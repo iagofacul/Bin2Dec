@@ -1,4 +1,4 @@
-import re
+from PySimpleGUI import PySimpleGUI as sg
 def main():
     x = "bindec"
     y = "decbin"
@@ -94,5 +94,28 @@ def bin2dec(numero):
     return soma
 
 
+#layout
+sg.theme('DarkTeal11')
+layout = [
+    ['',sg.Text('Conversor')],
+    [sg.Text('N° Decimal'), sg.Input(key = 'ndecimal'),sg.],
+    [sg.Text('N° Binário'), sg.Input(key = 'nbinario')],
+    ['', sg.Button('Converter')]
+]
 
-main()
+#janela
+janela = sg.Window('Conversor', layout)
+
+#ler eventos
+while True:
+    eventos, valores = janela.read()
+    if eventos == sg.WINDOW_CLOSED:
+        break
+  #  if eventos == 'Converter'#
+
+#classe
+class App():
+    def __init__(self):
+        self.window = sg.Window('Conversor', layout = layout, return_keyboard_events=False)
+        self.result = 0
+        self.window.read(timeout=1)
